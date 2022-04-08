@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useRef, useState } from "react";
+import { getSearch } from "./api/apiCalls";
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 
 function App() {
+  const inputRef = useRef();
+  const [searchResults, setSearchResults] = useState({});
+  async function submitSearch(e) {
+    e.preventDefault();
+    console.log("searching", inputRef.current.value);
+    setSearchResults(await getSearch(inputRef.current.value));
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header">iTunes music</header>
+      <main>
+        <form onSubmit={(e) => submitSearch(e)}>
+          <input type="text" ref={inputRef} />
+          <input type="submit" value="search" />
+        </form>
+        {!isEmpty(searchResults) && (
+          <ul>
+            {searchResults.results.map((r, i) => (
+              <li>
+                <pre>{JSON.stringify(r)}</pre>
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
     </div>
   );
 }
