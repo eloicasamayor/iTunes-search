@@ -1,6 +1,8 @@
 import "./App.css";
-import { useRef, useState } from "react";
-import { getSearch } from "./api/apiCalls";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { requestResults } from "./redux/actions";
+import { selectLoading, selectResults } from "./redux/selectors";
 
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
@@ -8,18 +10,15 @@ function isEmpty(obj) {
 
 function App() {
   const inputRef = useRef();
-  const [searchResults, setSearchResults] = useState({});
-  const [loading, setLoading] = useState(false);
-  async function submitSearch(e) {
-    let searchResultsLoaded = "";
+  const dispatch = useDispatch();
+  const searchResults = useSelector(selectResults);
+  const loading = useSelector(selectLoading);
+  const submitSearch = (e) => {
     e.preventDefault();
-    console.log("searching", inputRef.current.value);
-    setLoading((l) => true);
-    searchResultsLoaded = await getSearch(inputRef.current.value);
-    console.log("done");
-    setSearchResults(searchResultsLoaded);
-    setLoading((l) => false);
-  }
+
+    console.log("principi", inputRef.current.value);
+    dispatch(requestResults(inputRef.current.value));
+  };
   return (
     <div className="App">
       <header className="App-header">iTunes music</header>
@@ -28,7 +27,6 @@ function App() {
           <input type="text" ref={inputRef} />
           <input type="submit" value="search" />
         </form>
-
         {loading ? (
           <p>loading data...</p>
         ) : isEmpty(searchResults) ? (
@@ -40,8 +38,16 @@ function App() {
             {searchResults.results.map((r, i) => (
               <li>
                 <img src={r.artworkUrl100} />
-                <p>{r.artistName}</p>
-                <p>{r.collectionName}</p>
+                <p>
+                  <b>artist:</b> {r.artistName}
+                </p>
+                <p>
+                  <b>collection:</b> {r.collectionName}
+                </p>
+                <p>
+                  <b>track:</b> {r.trackName}
+                </p>
+                {/* <pre>{JSON.stringify(r)}</pre> */}
               </li>
             ))}
           </ul>
