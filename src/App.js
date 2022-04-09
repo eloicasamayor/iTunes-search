@@ -9,10 +9,16 @@ function isEmpty(obj) {
 function App() {
   const inputRef = useRef();
   const [searchResults, setSearchResults] = useState({});
+  const [loading, setLoading] = useState(false);
   async function submitSearch(e) {
+    let searchResultsLoaded = "";
     e.preventDefault();
     console.log("searching", inputRef.current.value);
-    setSearchResults(await getSearch(inputRef.current.value));
+    setLoading((l) => true);
+    searchResultsLoaded = await getSearch(inputRef.current.value);
+    console.log("done");
+    setSearchResults(searchResultsLoaded);
+    setLoading((l) => false);
   }
   return (
     <div className="App">
@@ -22,11 +28,20 @@ function App() {
           <input type="text" ref={inputRef} />
           <input type="submit" value="search" />
         </form>
-        {!isEmpty(searchResults) && (
+
+        {loading ? (
+          <p>loading data...</p>
+        ) : isEmpty(searchResults) ? (
+          <p>Oh, no! Something went wrong! </p>
+        ) : searchResults.resultCount === 0 ? (
+          <p>Sorry, there were no results for this search.</p>
+        ) : (
           <ul>
             {searchResults.results.map((r, i) => (
               <li>
-                <pre>{JSON.stringify(r)}</pre>
+                <img src={r.artworkUrl100} />
+                <p>{r.artistName}</p>
+                <p>{r.collectionName}</p>
               </li>
             ))}
           </ul>
