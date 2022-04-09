@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/iTunes-search/static/css/main.e6c13ad2.css",
+    "main.js": "/iTunes-search/static/js/main.c4c4b55b.js",
+    "static/js/787.c69ffaf7.chunk.js": "/iTunes-search/static/js/787.c69ffaf7.chunk.js",
+    "index.html": "/iTunes-search/index.html",
+    "main.e6c13ad2.css.map": "/iTunes-search/static/css/main.e6c13ad2.css.map",
+    "main.c4c4b55b.js.map": "/iTunes-search/static/js/main.c4c4b55b.js.map",
+    "787.c69ffaf7.chunk.js.map": "/iTunes-search/static/js/787.c69ffaf7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c4c4b55b.js"
+  ]
+}
