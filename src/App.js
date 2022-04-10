@@ -16,6 +16,7 @@ import {
   ResultsList,
   ResultsGrid,
   Pagination,
+  Header,
 } from "./Components";
 import { SearchForm } from "./Components/SearchForm";
 export function isEmpty(obj) {
@@ -64,9 +65,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">iTunes music</header>
+      <Header inputRef={inputRef} submitSearch={submitSearch} />
       <main>
-        <SearchForm inputRef={inputRef} submitSearch={submitSearch} />
+        {/* <SearchForm inputRef={inputRef} submitSearch={submitSearch} /> */}
         {searchResults != null &&
           searchResults.resultCount !== 0 &&
           searchParams.term !== "" && (
@@ -102,6 +103,7 @@ function App() {
           <SearchMessage
             searchMessage={searchMessage}
             showRefreshButton={searchResults == null}
+            loading={loading}
           />
         ) : listOrGridView ? (
           <ResultsList searchResults={searchResults} />
