@@ -1,8 +1,10 @@
 export const REQUEST_RESULTS = "search/REQUEST_SEARCH_RESULTS";
-export function requestResults(term) {
+export function requestResults(term, limit, offset) {
   return {
     type: REQUEST_RESULTS,
     term: term,
+    limit: limit,
+    offset: offset,
   };
 }
 
@@ -19,5 +21,14 @@ export function setLoading(loading) {
   return {
     type: SET_LOADING,
     loading: loading,
+  };
+}
+
+export const SET_SEARCH_PARAMS = "search/SET_SEARCH_PARAMS";
+export function setSearchParams(term, limit, offset) {
+  console.log(term, limit, offset);
+  return {
+    type: SET_SEARCH_PARAMS,
+    searchParams: { term: term, limit: limit, offset: offset },
   };
 }

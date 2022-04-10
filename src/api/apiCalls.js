@@ -1,14 +1,20 @@
 const apiEndpoint = "https://itunes.apple.com/search?";
 
-export async function getSearch(term) {
+export async function getSearch(term, limit, offset) {
   let searchResults = "";
-  await fetch(`${apiEndpoint}media=music&term=${term}&limit=20`, {
-    mode: "cors",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
-  })
+  console.log(
+    `${apiEndpoint}media=music&term=${term}&limit=${limit}&offset=${offset}`
+  );
+  await fetch(
+    `${apiEndpoint}media=music&term=${term}&limit=${limit}&offset=${offset}`,
+    {
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (response.ok) {
         console.log("SUCCESS");

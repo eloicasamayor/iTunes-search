@@ -5,3 +5,7 @@ export function selectResults(state) {
 export function selectLoading(state) {
   return state.loading;
 }
+
+export function selectSearchParams(state) {
+  return state.searchParams;
+}
