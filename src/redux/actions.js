@@ -26,7 +26,6 @@ export function setLoading(loading) {
 
 export const SET_SEARCH_PARAMS = "search/SET_SEARCH_PARAMS";
 export function setSearchParams(term, limit, offset) {
-  console.log(term, limit, offset);
   return {
     type: SET_SEARCH_PARAMS,
     searchParams: { term: term, limit: limit, offset: offset },

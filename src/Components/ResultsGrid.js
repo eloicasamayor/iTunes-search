@@ -15,7 +15,6 @@ export function ResultsGrid({ searchResults }) {
             <p>
               <b>track:</b> {r.trackName}
             </p>
-            {/* <pre>{JSON.stringify(r)}</pre> */}
           </li>
         ))}
       </ul>

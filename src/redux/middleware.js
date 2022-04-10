@@ -17,7 +17,6 @@ export const searchMiddleware = (store) => (next) => async (action) => {
     } else {
       store.dispatch(replaceResults(results));
     }
-    console.log(action.term, action.limit, action.offset);
     store.dispatch(setSearchParams(action.term, action.limit, action.offset));
     store.dispatch(setLoading(false));
   }

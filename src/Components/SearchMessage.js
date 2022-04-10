@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectSearchParams } from "../redux/selectors";
-import { requestResults } from "../redux/actions";
+import { selectSearchParams, requestResults } from "../redux";
 export function SearchMessage({ message, showRefreshButton }) {
   const dispatch = useDispatch();
   const searchParams = useSelector(selectSearchParams);

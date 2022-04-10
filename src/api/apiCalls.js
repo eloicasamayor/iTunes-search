@@ -2,9 +2,6 @@ const apiEndpoint = "https://itunes.apple.com/search?";
 
 export async function getSearch(term, limit, offset) {
   let searchResults = "";
-  console.log(
-    `${apiEndpoint}media=music&term=${term}&limit=${limit}&offset=${offset}`
-  );
   await fetch(
     `${apiEndpoint}media=music&term=${term}&limit=${limit}&offset=${offset}`,
     {
@@ -17,9 +14,9 @@ export async function getSearch(term, limit, offset) {
   )
     .then((response) => {
       if (response.ok) {
-        console.log("SUCCESS");
+        console.log("fetch success");
       } else {
-        console.log("Not successful");
+        console.log("fetch not successful");
       }
       return response.json();
     })

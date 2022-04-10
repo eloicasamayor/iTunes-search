@@ -1,8 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { reduceResults, reduceLoading, reduceSearchParams } from "./reducers";
-import { searchMiddleware } from "./middleware";
+import {
+  reduceResults,
+  reduceLoading,
+  reduceSearchParams,
+  searchMiddleware,
+} from "./";
 const reducer = combineReducers({
   loading: reduceLoading,
   searchParams: reduceSearchParams,

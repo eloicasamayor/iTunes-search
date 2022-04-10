@@ -1,16 +1,19 @@
 import "./App.css";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { requestResults } from "./redux/actions";
-import { Pagination } from "./Components/Pagination";
 import {
+  requestResults,
   selectLoading,
   selectResults,
   selectSearchParams,
-} from "./redux/selectors";
-import { SearchMessage } from "./Components/SearchMessage";
-import { ResultsList } from "./Components/ResultsList";
-import { ResultsGrid } from "./Components/ResultsGrid";
+} from "./redux";
+import {
+  SearchMessage,
+  ResultsList,
+  ResultsGrid,
+  Pagination,
+} from "./Components";
+import { SearchForm } from "./Components/SearchForm";
 export function isEmpty(obj) {
   if (obj == null) {
     return true;
@@ -32,7 +35,6 @@ function setMessage(loading, searchResults) {
 
 function App() {
   const inputRef = useRef();
-  const listViewCheckboxRef = useRef();
   const dispatch = useDispatch();
   const [listOrGridView, setListOrGridView] = useState(false);
   const searchResults = useSelector(selectResults);
@@ -43,7 +45,6 @@ function App() {
     dispatch(requestResults(inputRef.current.value, 20, 0));
   };
   const changeSearchResultsPage = (value) => {
-    console.log("next page");
     dispatch(
       requestResults(
         inputRef.current.value,
@@ -58,10 +59,7 @@ function App() {
     <div className="App">
       <header className="App-header">iTunes music</header>
       <main>
-        <form onSubmit={(e) => submitSearch(e)}>
-          <input type="text" ref={inputRef} />
-          <input type="submit" value="search" />
-        </form>
+        <SearchForm inputRef={inputRef} submitSearch={submitSearch} />
         {searchResults != null &&
           searchResults.resultCount !== 0 &&
           searchParams.term !== "" && (
