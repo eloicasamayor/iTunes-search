@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectSearchParams, requestResults } from "../redux";
-export function SearchMessage({ message, showRefreshButton }) {
+export function SearchMessage({ searchMessage, showRefreshButton }) {
   const dispatch = useDispatch();
   const searchParams = useSelector(selectSearchParams);
   const tryAgain = () => {
@@ -8,7 +8,7 @@ export function SearchMessage({ message, showRefreshButton }) {
   };
   return (
     <>
-      <p>{message}</p>
+      <p>{searchMessage}</p>
       {showRefreshButton && (
         <button onClick={() => tryAgain()}>try again</button>
       )}{" "}

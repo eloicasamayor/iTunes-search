@@ -1,5 +1,9 @@
 import "./App.css";
-import { useRef, useState } from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   requestResults,
@@ -20,23 +24,12 @@ export function isEmpty(obj) {
   }
   return Object.keys(obj).length === 0;
 }
-function setMessage(loading, searchResults) {
-  let msg = "";
-  if (loading) msg = "Loading data...";
-  if (searchResults == null || searchResults == undefined) {
-    msg = "Oh no, something went wrong! :(";
-  } else if (isEmpty(searchResults)) {
-    msg = "Use the form to search for music";
-  } else if (searchResults.resultCount === 0) {
-    msg = "Sorry, there were no results for this search";
-  }
-  return msg;
-}
 
 function App() {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [listOrGridView, setListOrGridView] = useState(false);
+  const [searchMessage, setSearchMessage] = useState("");
   const searchResults = useSelector(selectResults);
   const loading = useSelector(selectLoading);
   const searchParams = useSelector(selectSearchParams);
@@ -53,8 +46,22 @@ function App() {
       )
     );
   };
-  let message = "";
-  message = setMessage(loading, searchResults);
+
+  function setMessage(loading, searchResults) {
+    if (loading) {
+      setSearchMessage((m) => "Loading data...");
+    } else if (searchResults == null || searchResults == undefined) {
+      setSearchMessage((m) => "Oh no, something went wrong! :(");
+    } else if (isEmpty(searchResults)) {
+      setSearchMessage((m) => "Use the form to search for music");
+    } else if (searchResults.resultCount === 0) {
+      setSearchMessage((m) => "Sorry, there were no results for this search");
+    }
+  }
+  useEffect(() => {
+    setMessage(loading, searchResults);
+  }, [loading, searchResults]);
+
   return (
     <div className="App">
       <header className="App-header">iTunes music</header>
@@ -71,20 +78,29 @@ function App() {
           )}
 
         <pre>{JSON.stringify(searchResults)}</pre>
-        <input
+
+        <ToggleButtonGroup
+          color="primary"
+          value={true}
+          exclusive
           onChange={() => {
             setListOrGridView((v) => !v);
           }}
-          type="checkbox"
-          id="listViewCheckbox"
-          checked={listOrGridView}
-        ></input>
-        <label htmlFor="listViewCheckbox">List View / card view</label>
+        >
+          <ToggleButton value={listOrGridView} title="List View">
+            <ViewListIcon />
+          </ToggleButton>
+          <ToggleButton value={!listOrGridView} title="Grid View">
+            {" "}
+            <ViewModuleIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+
         {loading ||
         isEmpty(searchResults) ||
         searchResults.resultCount === 0 ? (
           <SearchMessage
-            message={message}
+            searchMessage={searchMessage}
             showRefreshButton={searchResults == null}
           />
         ) : listOrGridView ? (

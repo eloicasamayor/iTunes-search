@@ -1,24 +1,46 @@
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+
 export function ResultsList({ searchResults }) {
   return (
     <>
       <h2>List view</h2>
-      <ul>
+      <List sx={{ width: "100%", bgcolor: "background.paper" }}>
         {searchResults.results.map((r, i) => (
-          <li key={i}>
-            <img src={r.artworkUrl100} />
-            <p>
-              <b>artist:</b> {r.artistName}
-            </p>
-            <p>
-              <b>collection:</b> {r.collectionName}
-            </p>
-            <p>
-              <b>track:</b> {r.trackName}
-            </p>
-            {/* <pre>{JSON.stringify(r)}</pre> */}
-          </li>
+          <>
+            <ListItem alignItems="flex-start" key={i}>
+              <ListItemAvatar mr="10">
+                <Avatar
+                  variant="square"
+                  alt="Remy Sharp"
+                  src={r.artworkUrl100}
+                  sx={{ width: 100, height: 100 }}
+                />
+              </ListItemAvatar>
+              <ListItemText
+                disableTypography
+                primary={
+                  <Typography gutterBottom variant="h6" component="div">
+                    {r.artistName}
+                  </Typography>
+                }
+                secondary={
+                  <>
+                    <Typography variant="body1">{r.collectionName}</Typography>
+                    <Typography variant="body2">{r.trackName}</Typography>
+                  </>
+                }
+              ></ListItemText>
+            </ListItem>
+            <Divider variant="middle" component="li" />
+          </>
         ))}
-      </ul>
+      </List>
     </>
   );
 }
