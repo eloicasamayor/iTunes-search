@@ -23,7 +23,7 @@ export function ResultsGrid({ searchResults }) {
             xl={1.5}
             height="100%"
           >
-            <Card key={i} maxWidth="200px">
+            <Card key={i}>
               <CardMedia
                 component="img"
                 height="152px"
@@ -31,27 +31,14 @@ export function ResultsGrid({ searchResults }) {
                 alt={r.collectionName + "artwork"}
               />
               <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  component="div"
-                  maxWidth="152px"
-                >
+                <Typography gutterBottom variant="h6" component="div">
                   {r.artistName}
                 </Typography>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  maxWidth="152px"
-                >
+                <Typography variant="body1" color="text.secondary">
                   {r.collectionName}
                 </Typography>
 
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  maxWidth="190px"
-                >
+                <Typography variant="body2" color="text.secondary">
                   {r.trackName}
                 </Typography>
               </CardContent>

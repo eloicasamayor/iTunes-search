@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectSearchParams, requestResults } from "../redux";
-import CircularProgress from "@mui/material/CircularProgress";
 import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 export function SearchMessage({ searchMessage, showRefreshButton }) {
