@@ -10,13 +10,13 @@ export function ResultsList({ searchResults }) {
   return (
     <>
       <List
-        className="results-wrapper"
+        className="results-wrapper results-list"
         sx={{ width: "100%", bgcolor: "background.paper" }}
       >
         {searchResults.results.map((r, i) => (
           <>
             <ListItem alignItems="flex-start" key={i}>
-              <ListItemAvatar mr="10">
+              <ListItemAvatar className="results-list-img">
                 <Avatar
                   variant="square"
                   alt="Remy Sharp"

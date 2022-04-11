@@ -10,6 +10,7 @@ export function Pagination({
   return (
     <ButtonGroup variant="contained" aria-label="outlined primary button group">
       <Button
+        className="change-page-btn"
         onClick={() => changeSearchResultsPage(-1)}
         disabled={searchParams.offset === 0}
         startIcon={<NavigateBeforeIcon />}
@@ -18,6 +19,7 @@ export function Pagination({
       </Button>
 
       <Button
+        className="change-page-btn"
         onClick={() => changeSearchResultsPage(+1)}
         disabled={searchResults.resultCount < 20}
         endIcon={<NavigateNextIcon />}

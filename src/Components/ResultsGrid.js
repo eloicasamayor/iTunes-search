@@ -8,13 +8,21 @@ export function ResultsGrid({ searchResults }) {
   return (
     <>
       <Grid
-        className="results-wrapper"
+        className="results-wrapper results-grid"
         container
         spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12, xl: 10 }}
       >
         {searchResults.results.map((r, i) => (
-          <Grid item key={i}>
+          <Grid
+            item
+            key={i}
+            className="search-results-grid-item"
+            xs={6}
+            sm={4}
+            md={2}
+            xl={1.5}
+            height="100%"
+          >
             <Card key={i} maxWidth="200px">
               <CardMedia
                 component="img"

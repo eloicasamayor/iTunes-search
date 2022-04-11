@@ -38,9 +38,26 @@ footer {
 main {
   padding: 10px 8%;
 }
-
+.search-results-grid-item {
+  width: 200px;
+}
+.results-wrapper.results-grid {
+  justify-content: center;
+}
+.results-wrapper.results-list {
+  padding: 0 30px 0;
+}
+.results-list-img {
+  margin-right: 10px;
+}
 @media (max-width: 600px) {
   main {
     padding: 4px 2%;
+  }
+  button.change-page-btn {
+    padding: 3px 6px;
+  }
+  .results-wrapper.results-list {
+    padding: 0;
   }
 }
