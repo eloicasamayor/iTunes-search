@@ -1,8 +1,4 @@
 import "./App.css";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,7 +14,7 @@ import {
   Pagination,
   Header,
 } from "./Components";
-import { SearchForm } from "./Components/SearchForm";
+import { ResultsViewSwitch } from "./Components/ResultsViewSwitch";
 export function isEmpty(obj) {
   if (obj == null) {
     return true;
@@ -30,7 +26,9 @@ function App() {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [listOrGridView, setListOrGridView] = useState(false);
-  const [searchMessage, setSearchMessage] = useState("");
+  const [searchMessage, setSearchMessage] = useState(
+    "Use the form to search for music"
+  );
   const searchResults = useSelector(selectResults);
   const loading = useSelector(selectLoading);
   const searchParams = useSelector(selectSearchParams);
@@ -53,10 +51,12 @@ function App() {
       setSearchMessage((m) => "Loading data...");
     } else if (searchResults == null || searchResults == undefined) {
       setSearchMessage((m) => "Oh no, something went wrong! :(");
-    } else if (isEmpty(searchResults)) {
+    } else if (isEmpty(searchResults) || searchParams.term === "") {
       setSearchMessage((m) => "Use the form to search for music");
     } else if (searchResults.resultCount === 0) {
       setSearchMessage((m) => "Sorry, there were no results for this search");
+    } else {
+      setSearchMessage((m) => "");
     }
   }
   useEffect(() => {
@@ -67,7 +67,6 @@ function App() {
     <div className="App">
       <Header inputRef={inputRef} submitSearch={submitSearch} />
       <main>
-        {/* <SearchForm inputRef={inputRef} submitSearch={submitSearch} /> */}
         {searchResults != null &&
           searchResults.resultCount !== 0 &&
           searchParams.term !== "" && (
@@ -77,38 +76,25 @@ function App() {
               searchResults={searchResults}
             />
           )}
-
-        <pre>{JSON.stringify(searchResults)}</pre>
-
-        <ToggleButtonGroup
-          color="primary"
-          value={true}
-          exclusive
-          onChange={() => {
-            setListOrGridView((v) => !v);
-          }}
-        >
-          <ToggleButton value={listOrGridView} title="List View">
-            <ViewListIcon />
-          </ToggleButton>
-          <ToggleButton value={!listOrGridView} title="Grid View">
-            {" "}
-            <ViewModuleIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
-
-        {loading ||
-        isEmpty(searchResults) ||
-        searchResults.resultCount === 0 ? (
+        {/*<pre>{JSON.stringify(searchResults)}</pre>*/}
+        {searchMessage === "" ? (
+          <>
+            <ResultsViewSwitch
+              listOrGridView={listOrGridView}
+              setListOrGridView={setListOrGridView}
+            />
+            {listOrGridView ? (
+              <ResultsList searchResults={searchResults} />
+            ) : (
+              <ResultsGrid searchResults={searchResults} />
+            )}
+          </>
+        ) : (
           <SearchMessage
             searchMessage={searchMessage}
             showRefreshButton={searchResults == null}
             loading={loading}
           />
-        ) : listOrGridView ? (
-          <ResultsList searchResults={searchResults} />
-        ) : (
-          <ResultsGrid searchResults={searchResults} />
         )}
       </main>
     </div>

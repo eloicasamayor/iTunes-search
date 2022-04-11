@@ -1,9 +1,17 @@
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import { SearchForm } from "./SearchForm";
+
 export function Header({ inputRef, submitSearch }) {
   return (
-    <header>
-      <h1>iTunes search</h1>
-      <SearchForm inputRef={inputRef} submitSearch={submitSearch} />
-    </header>
+    <AppBar position="static">
+      <Toolbar>
+        {/*         <h1>Search music</h1>
+         */}{" "}
+        <MusicNoteIcon fontSize="large" />
+        <SearchForm inputRef={inputRef} submitSearch={submitSearch} />
+      </Toolbar>
+    </AppBar>
   );
 }
