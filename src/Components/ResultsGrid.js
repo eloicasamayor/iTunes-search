@@ -7,15 +7,15 @@ import Grid from "@mui/material/Grid";
 export function ResultsGrid({ searchResults }) {
   return (
     <>
-      <h2>Grid view</h2>
       <Grid
+        className="results-wrapper"
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12, xl: 10 }}
       >
         {searchResults.results.map((r, i) => (
           <Grid item key={i}>
-            <Card key={i}>
+            <Card key={i} maxWidth="200px">
               <CardMedia
                 component="img"
                 height="152px"

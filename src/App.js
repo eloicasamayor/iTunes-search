@@ -1,6 +1,8 @@
 import "./App.css";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Paper from "@mui/material/Paper";
+import { Link } from "@mui/material";
 import {
   requestResults,
   selectLoading,
@@ -21,6 +23,7 @@ import questionImg from "./media/undraw_question.svg";
 import serverDownImg from "./media/undraw_server_down.svg";
 import serverImg from "./media/undraw_server.svg";
 import startImg from "./media/undraw_start.svg";
+import { Typography } from "@mui/material";
 export function isEmpty(obj) {
   if (obj == null) {
     return true;
@@ -83,11 +86,15 @@ function App() {
 
   return (
     <div className="App">
-      <Header inputRef={inputRef} submitSearch={submitSearch} />
+      <Header
+        loading={loading}
+        inputRef={inputRef}
+        submitSearch={submitSearch}
+      />
       <main>
         {searchMessage === "" ? (
           <>
-            <div style={{ display: "flex" }}>
+            <Paper className="searchViewControls" elevation={0}>
               <Pagination
                 changeSearchResultsPage={changeSearchResultsPage}
                 searchParams={searchParams}
@@ -97,21 +104,44 @@ function App() {
                 listOrGridView={listOrGridView}
                 setListOrGridView={setListOrGridView}
               />
-            </div>
+            </Paper>
+            <h2>{`Search results for"${searchParams.term}"`}</h2>
             {listOrGridView ? (
               <ResultsList searchResults={searchResults} />
             ) : (
               <ResultsGrid searchResults={searchResults} />
             )}
+            <Paper className="searchViewControls" elevation={0}>
+              <Pagination
+                changeSearchResultsPage={changeSearchResultsPage}
+                searchParams={searchParams}
+                searchResults={searchResults}
+              />
+              <ResultsViewSwitch
+                listOrGridView={listOrGridView}
+                setListOrGridView={setListOrGridView}
+              />
+            </Paper>
           </>
         ) : (
           <SearchMessage
             searchMessage={searchMessage}
             showRefreshButton={searchResults == null}
-            loading={loading}
           />
         )}
       </main>
+      <footer>
+        <Typography color="rgba(255,255,255,0.5)">
+          Made by{" "}
+          <Link
+            color="#fff"
+            href="https://eloicasamayor.github.io/portfolio/"
+            underline="none"
+          >
+            Eloi Casamayor Esteve
+          </Link>
+        </Typography>
+      </footer>
     </div>
   );
 }

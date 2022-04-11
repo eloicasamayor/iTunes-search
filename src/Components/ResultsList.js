@@ -9,8 +9,10 @@ import Divider from "@mui/material/Divider";
 export function ResultsList({ searchResults }) {
   return (
     <>
-      <h2>List view</h2>
-      <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+      <List
+        className="results-wrapper"
+        sx={{ width: "100%", bgcolor: "background.paper" }}
+      >
         {searchResults.results.map((r, i) => (
           <>
             <ListItem alignItems="flex-start" key={i}>

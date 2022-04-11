@@ -3,7 +3,7 @@ import { selectSearchParams, requestResults } from "../redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-export function SearchMessage({ searchMessage, showRefreshButton, loading }) {
+export function SearchMessage({ searchMessage, showRefreshButton }) {
   const dispatch = useDispatch();
   const searchParams = useSelector(selectSearchParams);
   const tryAgain = () => {
@@ -20,13 +20,6 @@ export function SearchMessage({ searchMessage, showRefreshButton, loading }) {
       )}
       {searchMessage.img !== undefined && (
         <img className="feedback-img" src={searchMessage.img} />
-      )}
-      {loading && (
-        <>
-          <div className="loading-img">
-            <CircularProgress />
-          </div>
-        </>
       )}
     </div>
   );
