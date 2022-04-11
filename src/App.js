@@ -2,7 +2,6 @@ import "./App.css";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Paper from "@mui/material/Paper";
-import { Link } from "@mui/material";
 import {
   requestResults,
   selectLoading,
@@ -15,6 +14,7 @@ import {
   ResultsGrid,
   Pagination,
   Header,
+  Footer,
 } from "./Components";
 import { ResultsViewSwitch } from "./Components/ResultsViewSwitch";
 import loadingImg from "./media/undraw_loading.svg";
@@ -23,7 +23,6 @@ import questionImg from "./media/undraw_question.svg";
 import serverDownImg from "./media/undraw_server_down.svg";
 import serverImg from "./media/undraw_server.svg";
 import startImg from "./media/undraw_start.svg";
-import { Typography } from "@mui/material";
 export function isEmpty(obj) {
   if (obj == null) {
     return true;
@@ -130,18 +129,7 @@ function App() {
           />
         )}
       </main>
-      <footer>
-        <Typography color="rgba(255,255,255,0.5)">
-          Made by{" "}
-          <Link
-            color="#fff"
-            href="https://eloicasamayor.github.io/portfolio/"
-            underline="none"
-          >
-            Eloi Casamayor Esteve
-          </Link>
-        </Typography>
-      </footer>
+      <Footer />
     </div>
   );
 }
