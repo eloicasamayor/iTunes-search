@@ -13,8 +13,8 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha("#fff", 0.25),
   },
-  marginRight: ".8em",
-  marginLeft: ".8em",
+  marginRight: "5%",
+  marginLeft: "5%",
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   fontSize: "1.3em",

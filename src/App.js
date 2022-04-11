@@ -15,6 +15,12 @@ import {
   Header,
 } from "./Components";
 import { ResultsViewSwitch } from "./Components/ResultsViewSwitch";
+import loadingImg from "./media/undraw_loading.svg";
+import notFoundImg from "./media/undraw_not_found.svg";
+import questionImg from "./media/undraw_question.svg";
+import serverDownImg from "./media/undraw_server_down.svg";
+import serverImg from "./media/undraw_server.svg";
+import startImg from "./media/undraw_start.svg";
 export function isEmpty(obj) {
   if (obj == null) {
     return true;
@@ -48,13 +54,25 @@ function App() {
 
   function setMessage(loading, searchResults) {
     if (loading) {
-      setSearchMessage((m) => "Loading data...");
+      setSearchMessage((m) => ({
+        message: "Loading...",
+        img: loadingImg,
+      }));
     } else if (searchResults == null || searchResults == undefined) {
-      setSearchMessage((m) => "Oh no, something went wrong! :(");
+      setSearchMessage((m) => ({
+        message: "Oh, no! Something went wrong! :(",
+        img: questionImg,
+      }));
     } else if (isEmpty(searchResults) || searchParams.term === "") {
-      setSearchMessage((m) => "Use the form to search for music");
+      setSearchMessage((m) => ({
+        message: "Use the form to search for music",
+        img: startImg,
+      }));
     } else if (searchResults.resultCount === 0) {
-      setSearchMessage((m) => "Sorry, there were no results for this search");
+      setSearchMessage((m) => ({
+        message: "Sorry, there were no results for this search",
+        img: notFoundImg,
+      }));
     } else {
       setSearchMessage((m) => "");
     }
@@ -67,22 +85,19 @@ function App() {
     <div className="App">
       <Header inputRef={inputRef} submitSearch={submitSearch} />
       <main>
-        {searchResults != null &&
-          searchResults.resultCount !== 0 &&
-          searchParams.term !== "" && (
-            <Pagination
-              changeSearchResultsPage={changeSearchResultsPage}
-              searchParams={searchParams}
-              searchResults={searchResults}
-            />
-          )}
-        {/*<pre>{JSON.stringify(searchResults)}</pre>*/}
         {searchMessage === "" ? (
           <>
-            <ResultsViewSwitch
-              listOrGridView={listOrGridView}
-              setListOrGridView={setListOrGridView}
-            />
+            <div style={{ display: "flex" }}>
+              <Pagination
+                changeSearchResultsPage={changeSearchResultsPage}
+                searchParams={searchParams}
+                searchResults={searchResults}
+              />
+              <ResultsViewSwitch
+                listOrGridView={listOrGridView}
+                setListOrGridView={setListOrGridView}
+              />
+            </div>
             {listOrGridView ? (
               <ResultsList searchResults={searchResults} />
             ) : (

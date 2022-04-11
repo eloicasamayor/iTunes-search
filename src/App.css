@@ -1,4 +1,15 @@
 #searchMessageWrapper {
   margin: auto;
   padding: 4em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.feedback-img {
+  max-width: 65%;
+}
+.loading-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

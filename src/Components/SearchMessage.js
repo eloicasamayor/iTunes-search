@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectSearchParams, requestResults } from "../redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 export function SearchMessage({ searchMessage, showRefreshButton, loading }) {
   const dispatch = useDispatch();
@@ -9,19 +9,25 @@ export function SearchMessage({ searchMessage, showRefreshButton, loading }) {
   const tryAgain = () => {
     dispatch(requestResults(searchParams.term, 20, searchParams.offset));
   };
+  console.log("../media/" + searchMessage.img);
   return (
     <div id="searchMessageWrapper">
-      <Typography align="center">{searchMessage}</Typography>
-      {loading && (
-        <Box
-          sx={{ display: "flex", justifyContent: "center", padding: "50px" }}
-        >
-          <CircularProgress />
-        </Box>
-      )}
+      <Typography variant="h6" align="center" style={{ marginBottom: "50px" }}>
+        {searchMessage.message}
+      </Typography>
       {showRefreshButton && (
-        <button onClick={() => tryAgain()}>try again</button>
-      )}{" "}
+        <Button onClick={() => tryAgain()}>try again</Button>
+      )}
+      {searchMessage.img !== undefined && (
+        <img className="feedback-img" src={searchMessage.img} />
+      )}
+      {loading && (
+        <>
+          <div className="loading-img">
+            <CircularProgress />
+          </div>
+        </>
+      )}
     </div>
   );
 }
