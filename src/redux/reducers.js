@@ -1,4 +1,9 @@
-import { REPLACE_RESULTS, SET_LOADING, SET_SEARCH_PARAMS } from "./actions";
+import {
+  REPLACE_RESULTS,
+  SET_LOADING,
+  SET_PLAYING,
+  SET_SEARCH_PARAMS,
+} from "./actions";
 
 const initialState = {};
 
@@ -28,6 +33,16 @@ export function reduceSearchParams(state = initialParams, action) {
   switch (action.type) {
     case SET_SEARCH_PARAMS: {
       return action.searchParams;
+    }
+    default:
+      return state;
+  }
+}
+
+export function reducePlaying(state = {}, action) {
+  switch (action.type) {
+    case SET_PLAYING: {
+      return action.playing;
     }
     default:
       return state;

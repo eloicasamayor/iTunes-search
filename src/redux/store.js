@@ -7,8 +7,10 @@ import {
   reduceSearchParams,
   searchMiddleware,
 } from "./";
+import { reducePlaying } from "./reducers";
 const reducer = combineReducers({
   loading: reduceLoading,
+  playing: reducePlaying,
   searchParams: reduceSearchParams,
   searchResponse: reduceResults,
 });

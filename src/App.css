@@ -50,6 +50,9 @@ main {
 .results-list-img {
   margin-right: 10px;
 }
+audio {
+  height: 30px;
+}
 @media (max-width: 600px) {
   main {
     padding: 4px 2%;

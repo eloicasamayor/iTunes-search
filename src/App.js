@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import {
   requestResults,
   selectLoading,
+  selectPlaying,
   selectResults,
   selectSearchParams,
 } from "./redux";
@@ -15,6 +16,7 @@ import {
   Pagination,
   Header,
   Footer,
+  Playing,
 } from "./Components";
 import { ResultsViewSwitch } from "./Components/ResultsViewSwitch";
 import loadingImg from "./media/undraw_loading.svg";
@@ -40,6 +42,7 @@ function App() {
   const searchResults = useSelector(selectResults);
   const loading = useSelector(selectLoading);
   const searchParams = useSelector(selectSearchParams);
+  const playing = useSelector(selectPlaying);
   const submitSearch = (e) => {
     e.preventDefault();
     dispatch(requestResults(inputRef.current.value, 20, 0));
@@ -106,9 +109,9 @@ function App() {
             </Paper>
             <h2>{`Search results for"${searchParams.term}"`}</h2>
             {listOrGridView ? (
-              <ResultsList searchResults={searchResults} />
+              <ResultsList searchResults={searchResults} playing={playing} />
             ) : (
-              <ResultsGrid searchResults={searchResults} />
+              <ResultsGrid searchResults={searchResults} playing={playing} />
             )}
             <Paper className="searchViewControls" elevation={0}>
               <Pagination
@@ -129,6 +132,12 @@ function App() {
           />
         )}
       </main>
+      {!isEmpty(playing) && (
+        <aside>
+          <Playing playing={playing} />
+        </aside>
+      )}
+
       <Footer />
     </div>
   );

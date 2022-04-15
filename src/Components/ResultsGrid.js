@@ -3,8 +3,11 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-
-export function ResultsGrid({ searchResults }) {
+import { Button } from "@mui/material";
+import { setPlaying } from "../redux";
+import { useDispatch } from "react-redux";
+export function ResultsGrid({ searchResults, playing }) {
+  const dispatch = useDispatch();
   return (
     <>
       <Grid
@@ -41,6 +44,13 @@ export function ResultsGrid({ searchResults }) {
                 <Typography variant="body2" color="text.secondary">
                   {r.trackName}
                 </Typography>
+                {playing.previewUrl === r.previewUrl ? (
+                  <Typography variant="body2">PLAYING</Typography>
+                ) : (
+                  <Button onClick={() => dispatch(setPlaying(r))}>
+                    preview
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </Grid>

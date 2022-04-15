@@ -5,8 +5,12 @@ import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPlaying, setPlaying } from "../redux";
 
-export function ResultsList({ searchResults }) {
+export function ResultsList({ searchResults, playing }) {
+  const dispatch = useDispatch();
   return (
     <>
       <List
@@ -35,6 +39,14 @@ export function ResultsList({ searchResults }) {
                   <>
                     <Typography variant="body1">{r.collectionName}</Typography>
                     <Typography variant="body2">{r.trackName}</Typography>
+
+                    {playing.previewUrl === r.previewUrl ? (
+                      <Typography variant="body2">PLAYING</Typography>
+                    ) : (
+                      <Button onClick={() => dispatch(setPlaying(r))}>
+                        preview
+                      </Button>
+                    )}
                   </>
                 }
               ></ListItemText>

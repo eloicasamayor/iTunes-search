@@ -24,6 +24,14 @@ export function setLoading(loading) {
   };
 }
 
+export const SET_PLAYING = "search/SET_PLAYING";
+export function setPlaying(playing) {
+  return {
+    type: SET_PLAYING,
+    playing: playing,
+  };
+}
+
 export const SET_SEARCH_PARAMS = "search/SET_SEARCH_PARAMS";
 export function setSearchParams(term, limit, offset) {
   return {

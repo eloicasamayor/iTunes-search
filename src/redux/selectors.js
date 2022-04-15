@@ -9,3 +9,7 @@ export function selectLoading(state) {
 export function selectSearchParams(state) {
   return state.searchParams;
 }
+
+export function selectPlaying(state) {
+  return state.playing;
+}
