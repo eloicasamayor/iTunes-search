@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/iTunes-search/static/css/main.f80cdd22.css",
-    "main.js": "/iTunes-search/static/js/main.c3b77463.js",
+    "main.css": "/iTunes-search/static/css/main.2f9bc6c6.css",
+    "main.js": "/iTunes-search/static/js/main.2e6b8287.js",
     "static/js/787.c69ffaf7.chunk.js": "/iTunes-search/static/js/787.c69ffaf7.chunk.js",
     "static/media/undraw_not_found.svg": "/iTunes-search/static/media/undraw_not_found.bdf1c60c297dc6528f56fe6a382dacdf.svg",
     "static/media/undraw_question.svg": "/iTunes-search/static/media/undraw_question.4047f16cb75b2698a953eaf1d37f026c.svg",
@@ -10,12 +10,12 @@
     "static/media/undraw_server.svg": "/iTunes-search/static/media/undraw_server.a5ca5876e01e882b78b21c8e1507676c.svg",
     "static/media/undraw_loading.svg": "/iTunes-search/static/media/undraw_loading.021242476b16dedefa6b60ef23a914cb.svg",
     "index.html": "/iTunes-search/index.html",
-    "main.f80cdd22.css.map": "/iTunes-search/static/css/main.f80cdd22.css.map",
-    "main.c3b77463.js.map": "/iTunes-search/static/js/main.c3b77463.js.map",
+    "main.2f9bc6c6.css.map": "/iTunes-search/static/css/main.2f9bc6c6.css.map",
+    "main.2e6b8287.js.map": "/iTunes-search/static/js/main.2e6b8287.js.map",
     "787.c69ffaf7.chunk.js.map": "/iTunes-search/static/js/787.c69ffaf7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f80cdd22.css",
-    "static/js/main.c3b77463.js"
+    "static/css/main.2f9bc6c6.css",
+    "static/js/main.2e6b8287.js"
   ]
 }
