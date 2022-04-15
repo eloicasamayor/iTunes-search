@@ -53,6 +53,14 @@ main {
 audio {
   height: 30px;
 }
+div.playing-avatar,
+.playing-avatar > img {
+  width: 100px;
+  height: 100px;
+}
+div.playing-avatar {
+  margin-right: 5px;
+}
 @media (max-width: 600px) {
   main {
     padding: 4px 2%;

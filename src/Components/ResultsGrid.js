@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import { setPlaying } from "../redux";
 import { useDispatch } from "react-redux";
 export function ResultsGrid({ searchResults, playing }) {
@@ -45,7 +46,10 @@ export function ResultsGrid({ searchResults, playing }) {
                   {r.trackName}
                 </Typography>
                 {playing.previewUrl === r.previewUrl ? (
-                  <Typography variant="body2">PLAYING</Typography>
+                  <Typography variant="body1">
+                    PLAYING
+                    <MusicNoteIcon />
+                  </Typography>
                 ) : (
                   <Button onClick={() => dispatch(setPlaying(r))}>
                     preview

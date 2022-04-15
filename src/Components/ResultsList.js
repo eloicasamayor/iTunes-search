@@ -6,8 +6,11 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { Button } from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPlaying, setPlaying } from "../redux";
+import { PlayArrow } from "@mui/icons-material";
 
 export function ResultsList({ searchResults, playing }) {
   const dispatch = useDispatch();
@@ -41,9 +44,16 @@ export function ResultsList({ searchResults, playing }) {
                     <Typography variant="body2">{r.trackName}</Typography>
 
                     {playing.previewUrl === r.previewUrl ? (
-                      <Typography variant="body2">PLAYING</Typography>
+                      <Typography variant="body1">
+                        PLAYING
+                        <MusicNoteIcon />
+                      </Typography>
                     ) : (
-                      <Button onClick={() => dispatch(setPlaying(r))}>
+                      <Button
+                        variant="outlined"
+                        onClick={() => dispatch(setPlaying(r))}
+                        endIcon={<PlayArrowIcon />}
+                      >
                         preview
                       </Button>
                     )}
