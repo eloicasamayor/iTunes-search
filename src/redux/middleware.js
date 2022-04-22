@@ -1,5 +1,5 @@
 import { getSearch } from "../api/apiCalls";
-import { isEmpty } from "../App";
+import { isEmpty } from "../helpers/compareObject";
 import {
   replaceResults,
   REQUEST_RESULTS,

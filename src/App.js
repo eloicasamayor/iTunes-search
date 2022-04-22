@@ -2,6 +2,8 @@ import "./App.css";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Paper from "@mui/material/Paper";
+import { setFeedbackMessage } from "./helpers/feedbackMessages";
+import { isEmpty } from "./helpers/compareObject";
 import {
   requestResults,
   selectLoading,
@@ -19,26 +21,13 @@ import {
   Playing,
 } from "./Components";
 import { ResultsViewSwitch } from "./Components/ResultsViewSwitch";
-import loadingImg from "./media/undraw_loading.svg";
-import notFoundImg from "./media/undraw_not_found.svg";
-import questionImg from "./media/undraw_question.svg";
-import serverDownImg from "./media/undraw_server_down.svg";
-import serverImg from "./media/undraw_server.svg";
-import startImg from "./media/undraw_start.svg";
-export function isEmpty(obj) {
-  if (obj == null) {
-    return true;
-  }
-  return Object.keys(obj).length === 0;
-}
 
+const INITIAL_SEARCH_MESSAGE = "Use the form to search for music";
 function App() {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [listOrGridView, setListOrGridView] = useState(false);
-  const [searchMessage, setSearchMessage] = useState(
-    "Use the form to search for music"
-  );
+  const [searchMessage, setSearchMessage] = useState(INITIAL_SEARCH_MESSAGE);
   const searchResults = useSelector(selectResults);
   const loading = useSelector(selectLoading);
   const searchParams = useSelector(selectSearchParams);
@@ -57,33 +46,8 @@ function App() {
     );
   };
 
-  function setMessage(loading, searchResults) {
-    if (loading) {
-      setSearchMessage((m) => ({
-        message: "Loading...",
-        img: loadingImg,
-      }));
-    } else if (searchResults == null || searchResults == undefined) {
-      setSearchMessage((m) => ({
-        message: "Oh, no! Something went wrong! :(",
-        img: questionImg,
-      }));
-    } else if (isEmpty(searchResults) || searchParams.term === "") {
-      setSearchMessage((m) => ({
-        message: "Use the form to search for music",
-        img: startImg,
-      }));
-    } else if (searchResults.resultCount === 0) {
-      setSearchMessage((m) => ({
-        message: "Sorry, there were no results for this search",
-        img: notFoundImg,
-      }));
-    } else {
-      setSearchMessage((m) => "");
-    }
-  }
   useEffect(() => {
-    setMessage(loading, searchResults);
+    setSearchMessage(setFeedbackMessage(loading, searchResults, searchParams));
   }, [loading, searchResults]);
 
   return (

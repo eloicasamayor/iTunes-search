@@ -8,7 +8,6 @@ export function SearchMessage({ searchMessage, showRefreshButton }) {
   const tryAgain = () => {
     dispatch(requestResults(searchParams.term, 20, searchParams.offset));
   };
-  console.log("../media/" + searchMessage.img);
   return (
     <div id="searchMessageWrapper">
       <Typography variant="h6" align="center" style={{ marginBottom: "50px" }}>
