@@ -73,7 +73,6 @@ export function Playing({ playing }) {
                   {playing.collectionName}
                 </Typography>
                 <Typography variant="body2">{playing.trackName}</Typography>
-                {/* <audio controls src={playing.previewUrl}></audio> */}
                 <IconButton onClick={() => setPlayingBool((p) => !p)}>
                   {!playingBool ? (
                     <PlayCircleFilledWhiteIcon />

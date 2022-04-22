@@ -7,8 +7,6 @@ export function Header({ loading, inputRef, submitSearch }) {
   return (
     <AppBar position="static">
       <Toolbar>
-        {/*         <h1>Search music</h1>
-         */}{" "}
         <MusicNoteIcon fontSize="large" />
         <SearchForm
           loading={loading}
