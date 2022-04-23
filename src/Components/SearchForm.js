@@ -6,7 +6,6 @@ import InputBase from "@mui/material/InputBase";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { styled, alpha } from "@mui/material/styles";
-
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
   borderRadius: theme.shape.borderRadius,
@@ -34,6 +33,13 @@ export function SearchForm({ loading, inputRef, submitSearch }) {
           placeholder="Search music"
           inputRef={inputRef}
         />
+        <IconButton
+          color="primary"
+          size="large"
+          onClick={() => {
+            console.log("hola");
+          }}
+        ></IconButton>
         <IconButton color="primary" type="submit" size="large">
           {loading ? <CircularProgress size="24px" /> : <SearchIcon />}
         </IconButton>
