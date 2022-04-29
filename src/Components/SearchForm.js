@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { SearchSuggestionsList } from "./SearchSuggestionsList";
 import { styled, alpha } from "@mui/material/styles";
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
@@ -24,26 +24,35 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: theme.spacing(4),
   },
 }));
-export function SearchForm({ loading, inputRef, submitSearch }) {
+export function SearchForm({
+  loading,
+  inputContent,
+  setInputContent,
+  submitSearch,
+}) {
   return (
     <form onSubmit={(e) => submitSearch(e)} style={{ flex: "1" }}>
       <Search>
         <StyledInputBase
           fullWidth
           placeholder="Search music"
-          inputRef={inputRef}
+          /* inputRef={inputRef} */
+          onChange={(e) => setInputContent(e.target.value)}
         />
-        <IconButton
+        {/* <IconButton
           color="primary"
           size="large"
           onClick={() => {
             console.log("hola");
           }}
-        ></IconButton>
+        ></IconButton> */}
         <IconButton color="primary" type="submit" size="large">
           {loading ? <CircularProgress size="24px" /> : <SearchIcon />}
         </IconButton>
       </Search>
+      {inputContent !== "" && inputContent.length > 3 && (
+        <SearchSuggestionsList search={inputContent} />
+      )}
     </form>
   );
 }

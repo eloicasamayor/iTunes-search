@@ -24,7 +24,7 @@ import { ResultsViewSwitch } from "./Components/ResultsViewSwitch";
 
 const INITIAL_SEARCH_MESSAGE = "Use the form to search for music";
 function App() {
-  const inputRef = useRef();
+  const [inputContent, setInputContent] = useState("");
   const dispatch = useDispatch();
   const [listOrGridView, setListOrGridView] = useState(false);
   const [searchMessage, setSearchMessage] = useState(INITIAL_SEARCH_MESSAGE);
@@ -34,15 +34,11 @@ function App() {
   const playing = useSelector(selectPlaying);
   const submitSearch = (e) => {
     e.preventDefault();
-    dispatch(requestResults(inputRef.current.value, 20, 0));
+    dispatch(requestResults(inputContent, 20, 0));
   };
   const changeSearchResultsPage = (value) => {
     dispatch(
-      requestResults(
-        inputRef.current.value,
-        20,
-        searchParams.offset + value * 20
-      )
+      requestResults(inputContent, 20, searchParams.offset + value * 20)
     );
   };
 
@@ -54,7 +50,8 @@ function App() {
     <div className="App">
       <Header
         loading={loading}
-        inputRef={inputRef}
+        inputContent={inputContent}
+        setInputContent={setInputContent}
         submitSearch={submitSearch}
       />
       <main>

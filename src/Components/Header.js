@@ -7,7 +7,12 @@ import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { FormControl, InputLabel, Paper, Typography } from "@mui/material";
 import { useState } from "react";
-export function Header({ loading, inputRef, submitSearch }) {
+export function Header({
+  loading,
+  inputContent,
+  setInputContent,
+  submitSearch,
+}) {
   const [viewSearchSettings, setViewSearchSettings] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
   return (
@@ -17,10 +22,11 @@ export function Header({ loading, inputRef, submitSearch }) {
           <MusicNoteIcon fontSize="large" />
           <SearchForm
             loading={loading}
-            inputRef={inputRef}
+            inputContent={inputContent}
+            setInputContent={setInputContent}
             submitSearch={submitSearch}
           />
-          <FilterListIcon onClick={() => setViewSearchSettings((v) => !v)} />
+          {/* <FilterListIcon onClick={() => setViewSearchSettings((v) => !v)} /> */}
         </Toolbar>
       </AppBar>
       {viewSearchSettings && (
