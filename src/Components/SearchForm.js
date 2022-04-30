@@ -6,6 +6,8 @@ import InputBase from "@mui/material/InputBase";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SearchSuggestionsList } from "./SearchSuggestionsList";
 import { styled, alpha } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { requestSuggestions, selectSearchSuggestions } from "../redux";
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
   borderRadius: theme.shape.borderRadius,
@@ -30,6 +32,8 @@ export function SearchForm({
   setInputContent,
   submitSearch,
 }) {
+  const dispatch = useDispatch();
+  const searchSuggestions = useSelector(selectSearchSuggestions);
   return (
     <form onSubmit={(e) => submitSearch(e)} style={{ flex: "1" }}>
       <Search>
@@ -37,7 +41,10 @@ export function SearchForm({
           fullWidth
           placeholder="Search music"
           /* inputRef={inputRef} */
-          onChange={(e) => setInputContent(e.target.value)}
+          onChange={(e) => {
+            dispatch(requestSuggestions(e.target.value, 5, 0));
+            setInputContent(e.target.value);
+          }}
         />
         {/* <IconButton
           color="primary"
@@ -51,7 +58,10 @@ export function SearchForm({
         </IconButton>
       </Search>
       {inputContent !== "" && inputContent.length > 3 && (
-        <SearchSuggestionsList search={inputContent} />
+        <SearchSuggestionsList
+          search={inputContent}
+          searchSuggestions={searchSuggestions}
+        />
       )}
     </form>
   );

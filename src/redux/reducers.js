@@ -3,6 +3,7 @@ import {
   SET_LOADING,
   SET_PLAYING,
   SET_SEARCH_PARAMS,
+  REPLACE_SUGGESTIONS,
 } from "./actions";
 
 const initialState = {};
@@ -11,6 +12,15 @@ export function reduceResults(state = initialState, action) {
   switch (action.type) {
     case REPLACE_RESULTS: {
       return action.results;
+    }
+    default:
+      return state;
+  }
+}
+export function reduceSearchSuggestions(state = initialState, action) {
+  switch (action.type) {
+    case REPLACE_SUGGESTIONS: {
+      return action.suggestions;
     }
     default:
       return state;

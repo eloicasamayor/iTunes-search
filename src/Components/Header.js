@@ -12,6 +12,7 @@ export function Header({
   inputContent,
   setInputContent,
   submitSearch,
+  onInputContentChange,
 }) {
   const [viewSearchSettings, setViewSearchSettings] = useState(false);
   const [searchBy, setSearchBy] = useState("all");

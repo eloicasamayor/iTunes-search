@@ -16,6 +16,24 @@ export function replaceResults(results) {
   };
 }
 
+export const REPLACE_SUGGESTIONS = "search/REPLACE_SUGGESTIONS";
+export function replaceSuggestions(suggestions) {
+  return {
+    type: REPLACE_SUGGESTIONS,
+    suggestions,
+  };
+}
+
+export const REQUEST_SUGGESTIONS = "search/REQUEST_SEARCH_SUGGESTIONS";
+export function requestSuggestions(term, limit, offset) {
+  return {
+    type: REQUEST_SUGGESTIONS,
+    term: term,
+    limit: limit,
+    offset: offset,
+  };
+}
+
 export const SET_LOADING = "search/SET_LOADING";
 export function setLoading(loading) {
   return {

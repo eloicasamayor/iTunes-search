@@ -13,3 +13,7 @@ export function selectSearchParams(state) {
 export function selectPlaying(state) {
   return state.playing;
 }
+
+export function selectSearchSuggestions(state) {
+  return state.searchSuggestions;
+}
