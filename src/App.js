@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import { setFeedbackMessage } from "./helpers/feedbackMessages";
 import { isEmpty } from "./helpers/compareObject";
 import {
+  replaceSuggestions,
   requestResults,
   selectLoading,
   selectPlaying,
@@ -35,6 +36,7 @@ function App() {
   const submitSearch = (e) => {
     e.preventDefault();
     dispatch(requestResults(inputContent, 20, 0));
+    dispatch(replaceSuggestions({}));
   };
   const changeSearchResultsPage = (value) => {
     dispatch(

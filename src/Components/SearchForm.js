@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CancelIcon from "@mui/icons-material/Cancel";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
@@ -40,27 +41,34 @@ export function SearchForm({
         <StyledInputBase
           fullWidth
           placeholder="Search music"
+          value={inputContent}
           /* inputRef={inputRef} */
           onChange={(e) => {
             dispatch(requestSuggestions(e.target.value, 5, 0));
             setInputContent(e.target.value);
           }}
         />
-        {/* <IconButton
-          color="primary"
-          size="large"
-          onClick={() => {
-            console.log("hola");
-          }}
-        ></IconButton> */}
-        <IconButton color="primary" type="submit" size="large">
+        {inputContent !== "" && (
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => {
+              setInputContent("");
+            }}
+          >
+            <CancelIcon />
+          </IconButton>
+        )}
+        <IconButton color="default" type="submit" size="large">
           {loading ? <CircularProgress size="24px" /> : <SearchIcon />}
         </IconButton>
       </Search>
-      {inputContent !== "" && inputContent.length > 3 && (
+      {inputContent !== "" && inputContent.length > 3 && searchSuggestions && (
         <SearchSuggestionsList
           search={inputContent}
           searchSuggestions={searchSuggestions}
+          setInputContent={setInputContent}
+          submitSearch={submitSearch}
         />
       )}
     </form>

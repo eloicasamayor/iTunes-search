@@ -62,6 +62,7 @@ div.playing-avatar {
   margin-right: 5px;
 }
 .search-suggestions {
+  z-index: 3;
   position: absolute;
   width: 100%;
   left: 0;
